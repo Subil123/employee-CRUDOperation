@@ -1,0 +1,63 @@
+<h1>Employee List</h1>
+
+<nav>
+@if(isLoading){
+    <p class="loading-message">Employee list is loading</p>
+}
+
+@if(errorMessage){
+    <p class="error-message">{{errorMessage}}</p>
+}
+
+<table>
+    <thead>
+    <tr>
+
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+      <th>Action</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+        @if(employees.length === 0 && !isLoading && !errorMessage){
+            <tr>
+                <td colspan="5">
+                    No employee found
+                </td>
+            </tr>
+        }
+
+        @for(employee of employees;  track employee.id ){
+            <tr>
+                <td>{{employee.id}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.salary}}</td>
+                <td>
+                    <a [routerLink] = "['/employees/edit', employee.id]">
+                        Edit
+
+                    </a>
+
+                    <button type = "button" (click) = "deleteEmployee(employee.id)">Delete</button>
+                </td>
+                
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<br>
+<a routerLink = "/employees/add">
+    Add Employee
+</a>
+
+</nav>
+<hr>
+<router-outlet></router-outlet>

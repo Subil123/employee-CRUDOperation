@@ -1,0 +1,82 @@
+<h2>Edit Employee</h2>
+
+@if (isLoading) {
+  <p>Loading employee...</p>
+} @else {
+
+  <form #employeeForm="ngForm" (ngSubmit)="updateEmployee(employeeForm)">
+
+    <div>
+      <label for="name">Name:</label>
+
+      <input
+        id="name"
+        type="text"
+        name="name"
+        [(ngModel)]="employeeName"
+        required
+        #name="ngModel"
+      >
+
+      @if (name.invalid && name.touched) {
+        <p>Name is required.</p>
+      }
+    </div>
+
+    <br>
+
+    <div>
+      <label for="email">Email:</label>
+
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="employeeEmail"
+        required
+        email
+        #email="ngModel"
+      >
+
+      @if (email.invalid && email.touched) {
+        <p>Enter a valid email address.</p>
+      }
+    </div>
+
+    <br>
+
+    <div>
+      <label for="salary">Salary:</label>
+
+      <input
+        id="salary"
+        type="number"
+        name="salary"
+        [(ngModel)]="employeeSalary"
+        required
+        min="1"
+        #salary="ngModel"
+      >
+
+      @if (salary.invalid && salary.touched) {
+        <p>Salary must be greater than zero.</p>
+      }
+    </div>
+
+    <br>
+
+    <button
+      type="submit"
+      [disabled]="employeeForm.invalid || isSubmitting"
+    >
+      {{ isSubmitting ? 'Updating...' : 'Update Employee' }}
+    </button>
+
+    <a routerLink="/employees">Cancel</a>
+
+  </form>
+}
+
+@if (errorMessage) {
+  <p>{{ errorMessage }}</p>
+}

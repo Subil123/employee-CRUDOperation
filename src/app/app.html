@@ -1,0 +1,329 @@
+<!-- <H1>Employee Management System</H1>
+
+
+ <p>EmployeeName : {{employeeName}}</p> -->
+
+<!-- <input [value] = "employeeName"> -->
+<!-- <button [disabled]="isDisabled">
+    Save Employee
+</button> -->
+
+
+<!-- <button (click) = "nameSave()" >   Save Employeeee </button> -->
+
+<!-- <p>EmployeeEmail : {{employeeEmail}}</p>
+<p>EmployeeSalary : {{employeeSalary}}</p> -->
+
+<!-- @if(isEmployeeAvailable){
+
+
+
+<input [(ngModel)] = "employeeName">
+<p>{{employeeName}}</p>
+<input [(ngModel)] = "employeeSalary">
+<p>{{employeeSalary}}</p>
+
+<button (click) = "saveEmployeeDetails(employeeName , employeeSalary)">
+    Save Employee
+</button> 
+} -->
+<!-- <h2>Employees</h2>
+
+@if(employees.length > 0){
+
+     @for(employee of employees ; track employee.id){
+        <p>
+            {{employee.id}} -
+            {{employee.name}} -
+            {{employee.email}} -
+            {{employee.salary}}
+        </p>
+    } 
+}
+@else{
+    <p>No employees found</p>
+}  -->
+
+<!-- <h1>Employee Management System</h1>
+
+<table>
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+
+  <tbody> -->
+<!-- <p>Employee count: {{ employees.length }}</p> -->
+    <!-- @for (employee of employees; track employee.id) { -->
+      <!-- <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.salary }}</td>
+      </tr>
+    }
+
+  </tbody>
+
+</table>
+
+<h2>{{isEditMode ? ' Edit Employee' : 'Add Employee'}}</h2>
+
+<form (ngSubmit)="saveEmployee()">
+
+  
+
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="employeeName" name="name">
+
+  <br><br>
+
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="employeeEmail" name="email">
+
+  <br><br>
+
+  <label>Salary:</label>
+  <input type="number" [(ngModel)]="employeeSalary" name="salary">
+
+  <br><br>
+
+  <button type="submit">{{isEditMode ? 'Update Employee' : 'Save Employee'}}</button>
+
+</form>
+
+
+<table>
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @for (employee of employees; track employee.id) {
+
+      <tr>
+
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.salary }}</td>
+
+        <td>
+           <button (click)="editEmployee(employee)">
+        Edit
+      </button>
+          <button (click)="deleteEmployee(employee.id)">
+            Delete
+          </button>
+        </td>
+
+      </tr>
+
+    }
+
+  </tbody>
+
+</table>
+ -->
+<!-- @if(isLoading){
+  <p class = "loading-message">Loading Employee Details...</p>
+}
+@if(errorMessage){
+  <p class = "error-message">{{errorMessage}}</p>
+}
+ <h1>Employee Management System</h1> -->
+
+<!-- Employee Table -->
+<!-- <div class="table-container">
+<table>
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @if(employees.length === 0 && !isLoading && !errorMessage ){
+      <tr>
+        <td colspan="5" class = "empty-message">
+          No Employee Found...
+        </td>
+      </tr>
+    }
+
+    @for (employee of employees; track employee.id) {
+
+      <tr>
+
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.salary }}</td>
+
+        <td>
+
+          <button
+            type="button"
+            class = "edit-button"
+            (click)="editEmployee(employee)">
+            Edit
+          </button>
+
+          <button
+            type="button"
+            class = "delete-button"
+            (click)="deleteEmployee(employee.id)">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+    }
+
+  </tbody>
+
+</table>
+</div>
+
+<br> -->
+
+
+<!-- Add / Edit Employee Form -->
+
+<!-- <h2>
+  {{ isEditMode ? 'Edit Employee' : 'Add Employee' }}
+</h2> -->
+
+<!-- <form (ngSubmit)="saveEmployee()"> -->
+  <!-- <form 
+  #employeeForm = "ngForm"
+(ngSubmit)="saveEmployee(employeeForm)">
+
+  <label>Name:</label>
+
+  <input
+    type="text"
+    [(ngModel)]="employeeName"
+    name="name"
+    #name = "ngModel"
+    required
+    >
+    @if(name.invalid && name.touched){
+      <p>Name is requried.</p>
+    }
+
+  <br><br>
+
+
+  <label>Email:</label>
+
+  <input
+    type="email"
+    [(ngModel)]="employeeEmail"
+    name="email"
+    #email = "ngModel"
+    required
+    email>
+    @if(email.invalid && email.touched){
+      @if(email.errors?.['required']){
+        <p> Email is required </p>
+      }
+      @if(email.errors?.['email']){
+        <p>Please enter a valid email address</p>
+      }
+    }
+
+  <br><br>
+
+
+  <label>Salary:</label>
+
+  <input
+    type="number"
+    [(ngModel)]="employeeSalary"
+    name="salary"
+    #salary = "ngModel"
+    required
+    min = "1">
+    @if(salary.invalid && salary.touched){
+      @if(salary.errors?.['required']){
+        <p>Salary Is Required</p>
+      }
+      @if(salary.errors?.['min']){
+        <p>Salary must be greater than 0.</p>
+      }
+    }
+
+  <br><br> -->
+
+
+  <!-- Save / Update Button -->
+
+  <!-- <button
+   type="submit"
+   class = "save-button"
+   [disabled]="employeeForm.invalid">
+
+    {{ isEditMode ? 'Update Employee' : 'Save Employee' }}
+
+  </button> -->
+
+
+  <!-- Cancel Button -->
+
+  <!-- @if (isEditMode) {
+
+    <button
+      type="button"
+        class="cancel-button"
+      (click)="resetForm()">
+
+      Cancel
+
+    </button>
+
+  }
+
+</form> -->
+
+
+
+
+
+
+<!-- Temporary -->
+
+<h1>Employee Management System</h1>
+
+<nav>
+  <a routerLink="/employees">Employee List</a>
+
+  <a routerLink="/employees/add">Add Employee</a>
+</nav>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+
